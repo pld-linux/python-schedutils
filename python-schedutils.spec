@@ -13,15 +13,16 @@ Group:		Libraries/Python
 Source0:	https://www.kernel.org/pub/software/libs/python/python-schedutils/%{name}-%{version}.tar.xz
 # Source0-md5:	c29480cd754113b3eafc2e4b2618a107
 URL:		https://rt.wiki.kernel.org/index.php/Tuna
+BuildRequires:	python-devel >= 2
 BuildRequires:	python-modules >= 2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.612
 %if %{with python3}
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
