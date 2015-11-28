@@ -51,15 +51,11 @@ sched_{get,set}{affinity,scheduler} oraz pokrewnych.
 
 %build
 %if %{with python2}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python} setup.py build --build-base build-2
+%py_build
 %endif
 
 %if %{with python3}
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python3} setup.py build --build-base build-3
+%py3_build
 %endif
 
 %install
@@ -67,11 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 
 %if %{with python2}
-%{__python} setup.py \
-	build --build-base build-2 \
-	install --skip-build \
-		--root=$RPM_BUILD_ROOT \
-		--optimize=2
+%py_install
 
 %py_postclean
 
@@ -80,11 +72,7 @@ cp -p ptaskset.py $RPM_BUILD_ROOT%{_bindir}/ptaskset
 %endif
 
 %if %{with python3}
-%{__python3} setup.py \
-	build --build-base build-3 \
-	install --skip-build \
-		--root=$RPM_BUILD_ROOT \
-		--optimize=2
+%py3_install
 %endif
 
 %clean
