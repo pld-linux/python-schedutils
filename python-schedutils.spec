@@ -16,7 +16,7 @@ URL:		https://rt.wiki.kernel.org/index.php/Tuna
 BuildRequires:	python-devel >= 2
 BuildRequires:	python-modules >= 2
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.612
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
