@@ -6,21 +6,23 @@
 Summary:	Python 2 module to interface with the Linux scheduler
 Summary(pl.UTF-8):	Moduł Pythona 2 do komunikacji z linuksowym planistą
 Name:		python-schedutils
-Version:	0.4
-Release:	3
+Version:	0.5
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://www.kernel.org/pub/software/libs/python/python-schedutils/%{name}-%{version}.tar.xz
-# Source0-md5:	c29480cd754113b3eafc2e4b2618a107
+# Source0-md5:	e4a6fd6ad5307732e96c723e89056759
 URL:		https://rt.wiki.kernel.org/index.php/Tuna
+%if %{with python2}
 BuildRequires:	python-devel >= 2
 BuildRequires:	python-modules >= 2
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+%endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -86,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ptaskset
 %attr(755,root,root) %{py_sitedir}/schedutils.so
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/schedutils-%{version}-py*.egg-info
+%{py_sitedir}/schedutils-0.4-py*.egg-info
 %endif
 %endif
 
@@ -95,5 +97,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{py3_sitedir}/schedutils.cpython-*.so
-%{py3_sitedir}/schedutils-%{version}-py*.egg-info
+%{py3_sitedir}/schedutils-0.4-py*.egg-info
 %endif
