@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_without	python2 # CPython 2.x module
-%bcond_with	python3 # CPython 3.x module (enable when useful - now scripts use python2 shebang)
+%bcond_without	python3 # CPython 3.x module
 
 Summary:	Python 2 module to interface with the Linux scheduler
 Summary(pl.UTF-8):	Moduł Pythona 2 do komunikacji z linuksowym planistą
 Name:		python-schedutils
-Version:	0.5
+Version:	0.6
 Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://www.kernel.org/pub/software/libs/python/python-schedutils/%{name}-%{version}.tar.xz
-# Source0-md5:	e4a6fd6ad5307732e96c723e89056759
+# Source0-md5:	e834aa5b0d026102bd9b04f24019c731
 URL:		https://rt.wiki.kernel.org/index.php/Tuna
 %if %{with python2}
 BuildRequires:	python-devel >= 2
@@ -64,17 +64,17 @@ sched_{get,set}{affinity,scheduler} oraz pokrewnych.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 
+%if %{with python3}
+%py3_install
+%endif
+
 %if %{with python2}
 %py_install
 
 %py_postclean
 
-cp -p pchrt.py $RPM_BUILD_ROOT%{_bindir}/pchrt
-cp -p ptaskset.py $RPM_BUILD_ROOT%{_bindir}/ptaskset
-%endif
-
-%if %{with python3}
-%py3_install
+#cp -p pchrt.py $RPM_BUILD_ROOT%{_bindir}/pchrt
+#cp -p ptaskset.py $RPM_BUILD_ROOT%{_bindir}/ptaskset
 %endif
 
 %clean
@@ -87,8 +87,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pchrt
 %attr(755,root,root) %{_bindir}/ptaskset
 %attr(755,root,root) %{py_sitedir}/schedutils.so
+%{_mandir}/man1/pchrt.1*
+%{_mandir}/man1/ptaskset.1*
 %if "%{py_ver}" > "2.4"
-%{py_sitedir}/schedutils-0.4-py*.egg-info
+%{py_sitedir}/schedutils-%{version}-py*.egg-info
 %endif
 %endif
 
@@ -97,5 +99,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{py3_sitedir}/schedutils.cpython-*.so
-%{py3_sitedir}/schedutils-0.4-py*.egg-info
+%{py3_sitedir}/schedutils-%{version}-py*.egg-info
 %endif
