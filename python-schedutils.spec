@@ -7,7 +7,7 @@ Summary:	Python 2 module to interface with the Linux scheduler
 Summary(pl.UTF-8):	Moduł Pythona 2 do komunikacji z linuksowym planistą
 Name:		python-schedutils
 Version:	0.6
-Release:	7
+Release:	8
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://www.kernel.org/pub/software/libs/python/python-schedutils/%{name}-%{version}.tar.xz
